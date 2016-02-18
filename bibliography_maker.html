@@ -1,0 +1,84 @@
+<html>
+<head><title>Bibliography Maker</title></head>
+<style>
+.req{color:red;}
+</style>
+<body>
+<center>
+	<h1>Bibliography Info</h1>
+		Website<span class='req'>*</span>
+			<input type="url" id='web' size=54 required>
+		Title<span class='req'>*</span>
+			<input type="text" id='tit' size=54 required><br/><br/>
+		First Name
+			<input type="text" id='fname' size=10>
+		Last/Org Name<span class='req'>*</span>
+			<input type="text" id='lname' size=10 required>
+		Year
+			<input type="text" id='year' size=10 maxlength=4><br/><br/>
+		<button type="submit" onclick="make()">Make Bibliography</button>
+	<div id='cen' contenteditable='true'></div>
+</center>
+<script>
+function make(){
+	var info = new Array();
+	for(var i=0;i < 5;i++){
+		var inputv = document.getElementsByTagName('input').item(i).value.replace(/(^\s*)|(\s*$)/g, "").toLowerCase();
+		info[i] = inputv;
+	}
+	if (info[0] == '' || info[1] == '' || info[3] == ''){
+		alert('URL,title and Last/Org name are required!');
+		return false;
+	}
+	//web
+	if(!info[0].match("http")){
+		alert("URL must have a 'http://' or 'https://' ");
+		return false;
+	}else{
+		var web = info[0].replace(/\s+/g,'');
+	}
+	//tit
+	var titarr = info[1].split(' ');
+	for(var i=titarr.length;i>=0;i--){
+		if(titarr[i] == ""){
+			titarr.splice(i, 1);
+		}
+	}
+	var tit = titarr.join(' ').replace(/(^|\s+)\w/g,function(s){return s.toUpperCase()});
+	//name
+	if(info[2]== ''){
+		var name = info[3].toUpperCase()+'. ';
+	}else{
+		var name = info[3].substr(0,1).toUpperCase()+info[3].replace(/\s+/g,'').substr(1)+', '+info[2][0].toUpperCase()+'. ';
+	}
+	//year & date
+	var mydate=new Date();
+	if(!info[4]==''){
+		if(parseInt(info[4]) > mydate.getFullYear() || info[4] < 1000){
+			alert('Wrong year number');
+			return false;
+		}else{
+			var year = '('+info[4]+'). ';
+		}
+	}else{
+		var year = '(-). ';
+	}
+	var month = parseInt(mydate.getMonth())+1;
+	if(month < 10){
+		month = '0'+month;
+	}
+	var today = ' [Accessed: '+mydate.getDate()+'/'+month+'/'+mydate.getFullYear()+']';
+	//bib
+	var bib = name+year+tit+'. [Online]. Available from: '+web+today;
+	var cen = document.getElementById('cen');
+	var pre = document.createElement("PRE");
+	var bibres = document.createTextNode(bib);
+	pre.style.fontFamily = 'Times';
+	pre.style.fontSize = '11';
+	pre.appendChild(bibres);
+	cen.appendChild(pre);
+
+}
+</script>
+</body>
+</html>
