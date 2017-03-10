@@ -1,5 +1,8 @@
 <html>
-<head><title>Bibliography Maker</title></head>
+<head>
+  <title>Bibliography Maker</title>
+  <link rel = "Shortcut Icon" href="1.ico">
+</head>
 <style>
 .req{color:red;}
 </style>
@@ -23,7 +26,7 @@
 function make(){
 	var info = new Array();
 	for(var i=0;i < 5;i++){
-		var inputv = document.getElementsByTagName('input').item(i).value.replace(/(^\s*)|(\s*$)/g, "").toLowerCase();
+		var inputv = document.getElementsByTagName('input').item(i).value.replace(/(^\s*)|(\s*$)/g, "");
 		info[i] = inputv;
 	}
 	if (info[0] == '' || info[1] == '' || info[3] == ''){
@@ -31,14 +34,14 @@ function make(){
 		return false;
 	}
 	//web
-	if(!info[0].match("http")){
+	if(!info[0].toLowerCase().match("http")){
 		alert("URL must have a 'http://' or 'https://' ");
 		return false;
 	}else{
 		var web = info[0].replace(/\s+/g,'');
 	}
 	//tit
-	var titarr = info[1].split(' ');
+	var titarr = info[1].toLowerCase().split(' ');
 	for(var i=titarr.length;i>=0;i--){
 		if(titarr[i] == ""){
 			titarr.splice(i, 1);
