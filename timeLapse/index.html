@@ -1,0 +1,171 @@
+<html style="font-family:Arial,sans-serif;">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Time-Lapse Photography Timer</title>
+	<style>
+		.contain{text-align:center;margin-top:5%;width:80%;background:#fff;border-radius:5px;box-shadow: 2px 3px 20px 0px black;padding:20px;}
+		.timeinput{padding:8px 10px 8px 10px;width:30%;border-radius:5px;box-shadow:0px;}
+		.form-group{width:100%;padding:1%;}
+		.btn{
+			display: inline-block;
+			padding: 6px 12px;
+			margin-bottom: 0;
+			font-size: 15px;
+			font-weight: 400;
+			line-height: 1.42857143;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			-ms-touch-action: manipulation;
+			touch-action: manipulation;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+			color:white;
+		}
+		.btn_warn{background: #FF6384;}
+		.btn_warn:hover{background: #fd8fa6;color:black;}
+		.btn_primary{background: #36A2EB;}
+		.btn_primary:hover{background: #82c3ef;color:black;}
+		.btn_done{background: #4BC0C0;display:none;}
+		.btn_done:hover{background: #84eaea;color:black;}
+		.btn_done:disabled{background: #add6d6;color:grey;cursor:not-allowed;}
+		@media (max-width: 800px){.charts{width:40%}}
+		@media (min-width: 800px){.charts{width:300px}.btn_block{padding: 12px 40px 12px 40px;}}
+		.hint{color:red;background:#FFCE56;border-radius:5px;padding:3px;}
+	</style>
+	<script src="Chart.bundle.js"></script>
+	
+</head>
+<body style="background:#333">
+<center>
+	<div class="contain">
+		<h1>Time-Lapse Photography Timer</h1>
+		<div class='form-group'>
+			<label for='interTime'>Interval Time</label>
+			<input type="number" id='interTime' placeholder="Seconds, > 1" class='timeinput' min=2/>
+		</div>
+		<div class='form-group'>
+			<label for='preTime'>Ahead Time</label>
+			<input type="number" id='preTime' placeholder="Seconds, Default 1" class='timeinput' min=1/>
+		</div>
+		<div class='form-group'>
+			<button type='button' onclick='stratCount()' id='start' class='btn btn_block btn_primary'>Strart</button>
+			<button type='button' onclick='doneshots()' id='done' class='btn btn_block btn_done' disabled>Done</button>
+			<button type='button' onclick='stopCount()' class='btn btn_block btn_warn'>Pause</button>
+			<button type='button' onclick='location.href="time_lapse_photo.html"' class='btn btn_block'>Reset</button>
+		</div>
+		<center>
+			<div class='form-group'>
+				<h3>
+					<span id='shows'>0 s</span><br/>
+					<span id='loops'>0 Shots, </span>
+					<span id='dones'>0 Done</span>
+				<h3/>
+			</div>
+			<div class="charts">
+				<canvas id="ctx" width="300" height="300"></canvas>
+			</div>
+		</center>
+	</div>
+</center>
+</body>
+</html>
+<script>
+		window.onbeforeunload=function(){return "Do you Want to leave, current info will lose";}
+		function initData(){
+			var t;
+			time = 0;
+			loops = 1;
+			data_chart = [0,1]
+			dones = 1;
+		}
+		initData();
+		function countTime(){
+			interTime = parseInt(document.getElementById('interTime').value);
+			if(time==0){
+				preTime = parseInt(document.getElementById('preTime').value);
+				preTime = (preTime!=preTime||preTime<1) ? 1:preTime;
+				time = preTime;
+			}
+			if(interTime!=interTime||interTime<1){
+				alert('Interval Time must greater than 1 seconds!')
+				stopCount();initData()
+			}else if(preTime >= interTime){
+				alert('Prepare Time (default 1) cannot be greater than Interval Time!')
+				stopCount();initData()
+			}else{
+				if(loops%2==0){
+					x = time.toFixed(0);
+					y = (interTime-time).toFixed(0);
+					labels = ['Remain','Pass by']
+					colors = ["#36A2EB","#FF6384"];
+				}else{
+					x = (interTime-time).toFixed(0);
+					y = time.toFixed(0);
+					labels = ['Pass by','Remain']
+					colors = ["#FF6384","#36A2EB"];
+				}
+				myPieChart.data.datasets[0].backgroundColor = colors;
+				myPieChart.data.datasets[0].data = [y,x];
+				myPieChart.data.labels = labels;
+				myPieChart.update()
+				if(time<interTime){
+					document.getElementById('shows').innerHTML = (interTime-time).toFixed(0)+'&nbsp;s'
+					time += 1;
+				}else{
+					document.getElementById('shows').innerHTML = '<span class="hint">'+interTime+' s</span>';
+					document.getElementById('loops').innerHTML = loops+' Shots';
+					document.getElementById('done').disabled = false;
+					time = 1;
+					loops++;
+					if(loops>dones){
+						document.getElementById('dones').className = 'hint';
+					}
+				}
+			}
+		}
+		function stratCount(){
+			document.getElementById('shows').innerHTML = '<span class="hint">'+parseInt(document.getElementById('interTime').value)+' s</span>';
+			document.getElementById('interTime').disabled=true;
+			document.getElementById('preTime').disabled=true;
+			document.getElementById("start").style.display="none";
+			document.getElementById("done").style.display="inline";
+			t = setInterval(countTime,1000)
+		}
+		function stopCount(){
+			clearInterval(t);
+			document.getElementById('interTime').disabled=false;
+			document.getElementById('preTime').disabled=false;
+			document.getElementById("start").style.display="inline";
+			document.getElementById("done").style.display="none";
+			
+		}
+		function doneshots(){
+			document.getElementById('dones').innerHTML = dones+' Done';
+			dones++;
+			if(dones==loops){
+				document.getElementById('done').disabled = true;
+				document.getElementById('dones').className = '';
+			}
+		}
+		//VERSION 2.0 Add Chart.js
+		ctx = document.getElementById('ctx');
+		var myPieChart = new Chart(ctx,{
+			type: 'pie',
+			data:  {
+				labels: ['Pass by','Remain'],
+				datasets: [{
+						data: [0,1],
+						backgroundColor: ["#FF6384","#36A2EB"]
+				}]
+			}
+		});
+	</script>
