@@ -19,28 +19,28 @@
 			text-align: center;
 			white-space: nowrap;
 			vertical-align: middle;
-			-ms-touch-action: manipulation;
+			background-image: none;
 			touch-action: manipulation;
-			cursor: pointer;
+			-ms-touch-action: manipulation;
+			border: 1px solid transparent;
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
-			user-select: none;
-			background-image: none;
-			border: 1px solid transparent;
 			border-radius: 4px;
+			user-select: none;
+			cursor: pointer;
 			color:white;
 		}
 		.btn_warn{background: #FF6384;}
-		.btn_warn:hover{background: #fd8fa6;color:black;}
 		.btn_primary{background: #36A2EB;}
-		.btn_primary:hover{background: #82c3ef;color:black;}
 		.btn_done{background: #4BC0C0;display:none;}
 		.btn_done:hover{background: #84eaea;color:black;}
+		.btn_warn:hover{background: #fd8fa6;color:black;}
+		.btn_primary:hover{background: #82c3ef;color:black;}
 		.btn_done:disabled{background: #add6d6;color:grey;cursor:not-allowed;}
-		@media (max-width: 800px){.charts{width:40%}}
-		@media (min-width: 800px){.charts{width:300px}.btn_block{padding: 12px 40px 12px 40px;}}
 		.hint{color:red;background:#FFCE56;border-radius:5px;padding:3px;}
+		@media (max-width:800px){.charts{width:40%}.mainTitle{font-size:1.2em}}
+		@media (min-width:800px){.charts{width:300px}.btn_block{padding: 12px 40px 12px 40px;}}
 	</style>
 	<script src="Chart.bundle.js"></script>
 </head>
@@ -52,7 +52,7 @@
 		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> .mp3: Chrome,IE9,Safari-->
 	</audio>
 	<div class="contain">
-		<h1>Time-Lapse Photography Timer</h1>
+		<h1 class='mainTitle'>Time-Lapse Photography Timer</h1>
 		<div class='form-group'>
 			<label for='interTime'>Interval Seconds</label>
 			<input type="number" id='interTime' placeholder=">= 2" class='timeinput' min=2/>
