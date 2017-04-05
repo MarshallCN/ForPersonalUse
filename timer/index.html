@@ -39,19 +39,19 @@
 		.btn_primary:hover{background: #82c3ef;color:black;}
 		.btn_done:disabled{background: #add6d6;color:grey;cursor:not-allowed;}
 		.hint{color:red;background:#FFCE56;border-radius:5px;padding:3px;}
-		@media (max-width:800px){.charts{width:40%}.mainTitle{font-size:1.2em}}
-		@media (min-width:800px){.charts{width:300px}.btn_block{padding: 12px 40px 12px 40px;}}
+		@media (min-width:590px){.charts{width:300px}.btn_block{padding: 12px 40px 12px 40px;}}
+		@media (max-width:590px){.charts{width:50%}.mainTitle{font-size:1.2em}}
 	</style>
 	<script src="Chart.bundle.js"></script>
 </head>
-<body style="background:#333">
+<body style="background:#1E3E57">
 <center>
 	<audio id='player' src='../src/beep.ogg' preload='auto' loop style='display:none;'>
 		<!--<source  type="audio/ogg"></source> Beep -->
 		<!-- <source src='../src/down_cut.ogg' type="audio/ogg"></source> .ogg: Chrome,FF,IE9,Opera-->
 		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> .mp3: Chrome,IE9,Safari-->
 	</audio>
-	<div class="contain">
+	<div class="contain contain-sm">
 		<h1 class='mainTitle'>Time-Lapse Photography Timer</h1>
 		<div class='form-group'>
 			<label for='interTime'>Interval Seconds</label>
@@ -69,7 +69,7 @@
 			</select>
 		</div>
 		<div class='form-group'>
-			<button type='button' onclick='stratCount()' id='start' class='btn btn_block btn_primary'>Strart</button>
+			<button type='button' onclick='startCount()' id='start' class='btn btn_block btn_primary'>Strart</button>
 			<button type='button' onclick='doneshots()' id='done' class='btn btn_block btn_done' disabled>Done</button>
 			<button type='button' onclick='stopCount()' class='btn btn_block btn_warn'>Pause</button>
 			<button type='button' onclick='location.href="index.html"' class='btn btn_block'>Reset</button>
@@ -142,8 +142,8 @@
 				}
 			}
 		}
-		function stratCount(){
-			if(document.getElementById('interTime').value!=''){
+		function startCount(){
+			if(document.getElementById('interTime').value!=''&&loops==1){
 				document.getElementById('shows').innerHTML = '<span class="hint">'+parseInt(document.getElementById('interTime').value)+' s</span>';
 			}
 			document.getElementById('interTime').disabled=true;
