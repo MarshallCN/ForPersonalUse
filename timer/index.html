@@ -48,8 +48,8 @@
 <center>
 	<audio id='player' src='../src/beep.ogg' preload='auto' loop style='display:none;'>
 		<!--<source  type="audio/ogg"></source> Beep -->
-		<!-- <source src='../src/down_cut.ogg' type="audio/ogg"></source> Music-->
-		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> only for Safari-->
+		<!-- <source src='../src/down_cut.ogg' type="audio/ogg"></source> .ogg: Chrome,FF,IE9,Opera-->
+		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> .mp3: Chrome,IE9,Safari-->
 	</audio>
 	<div class="contain">
 		<h1>Time-Lapse Photography Timer</h1>
@@ -64,8 +64,8 @@
 		<div class='form-group'>
 			<label for='preTime'>Prompt Tone</label>
 			<select class='timeinput' onchange='document.getElementById("player").src=this.value'/>
-				<option value='../src/beep.ogg'>Beep (.ogg)</option>
-				<option value='../src/down_cut.ogg'>Music (.mp3)</option>
+				<option value='../src/beep.ogg'>Beep (.ogg 22.6kb)</option>
+				<option value='../src/down_cut.mp3'>Music (.mp3 893kb)</option>
 			</select>
 		</div>
 		<div class='form-group'>
