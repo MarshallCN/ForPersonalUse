@@ -46,19 +46,27 @@
 </head>
 <body style="background:#333">
 <center>
-	<audio id='player' preload loop style='display:none;'>
-		<source src='../src/down_cut.ogg' type="audio/ogg"></source>
+	<audio id='player' src='../src/beep.ogg' preload='auto' loop style='display:none;'>
+		<!--<source  type="audio/ogg"></source> Beep -->
+		<!-- <source src='../src/down_cut.ogg' type="audio/ogg"></source> Music-->
 		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> only for Safari-->
 	</audio>
 	<div class="contain">
 		<h1>Time-Lapse Photography Timer</h1>
 		<div class='form-group'>
-			<label for='interTime'>Interval Time</label>
-			<input type="number" id='interTime' placeholder="Seconds, > 1" class='timeinput' min=2/>
+			<label for='interTime'>Interval Seconds</label>
+			<input type="number" id='interTime' placeholder=">= 2" class='timeinput' min=2/>
 		</div>
 		<div class='form-group'>
-			<label for='preTime'>Ahead Time</label>
-			<input type="number" id='preTime' placeholder="Seconds, Default 1" class='timeinput' min=1/>
+			<label for='preTime'>First Ahead Sec</label>
+			<input type="number" id='preTime' placeholder="Default 1" class='timeinput' min=1/>
+		</div>
+		<div class='form-group'>
+			<label for='preTime'>Prompt Tone</label>
+			<select class='timeinput' onchange='document.getElementById("player").src=this.value'/>
+				<option value='../src/beep.ogg'>Beep (.ogg)</option>
+				<option value='../src/down_cut.ogg'>Music (.mp3)</option>
+			</select>
 		</div>
 		<div class='form-group'>
 			<button type='button' onclick='stratCount()' id='start' class='btn btn_block btn_primary'>Strart</button>
@@ -103,7 +111,7 @@
 				alert('Interval Time must greater than 1 seconds!')
 				stopCount();initData()
 			}else if(preTime >= interTime){
-				alert('Prepare Time (default 1) cannot be greater than Interval Time!')
+				alert('Interval Time must be greater than Prepare Time (default 1)!')
 				stopCount();initData()
 			}else{
 				if(loops%2==0){
@@ -181,7 +189,7 @@
 				}]
 			}
 		});
-		document.getElementById('player').currentTime = 23.5;
+		document.getElementById('player').currentTime = 23.5; //only for music src
 		function playAudio(){
 			document.getElementById('player').play()
 		}
