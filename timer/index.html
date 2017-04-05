@@ -63,7 +63,7 @@
 		</div>
 		<div class='form-group'>
 			<label for='preTime'>Prompt Tone</label>
-			<select class='timeinput' onchange='document.getElementById("player").src=this.value'/>
+			<select class='timeinput' id='tone' onchange='player=document.getElementById("player");player.src=this.value;player.currentTime=23.8'/>
 				<option value='../src/beep.ogg'>Beep (.ogg 22.6kb)</option>
 				<option value='../src/down_cut.mp3'>Music (.mp3 893kb)</option>
 			</select>
@@ -148,6 +148,7 @@
 			}
 			document.getElementById('interTime').disabled=true;
 			document.getElementById('preTime').disabled=true;
+			document.getElementById('tone').disabled=true;
 			document.getElementById("start").style.display="none";
 			document.getElementById("done").style.display="inline";
 			t = setInterval(countTime,1000);
@@ -157,6 +158,7 @@
 			clearInterval(t);
 			document.getElementById('interTime').disabled=false;
 			document.getElementById('preTime').disabled=false;
+			document.getElementById('tone').disabled=false;
 			document.getElementById("start").style.display="inline";
 			document.getElementById("done").style.display="none";
 			pauseAudio()
