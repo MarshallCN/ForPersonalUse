@@ -196,6 +196,10 @@ if (window.Notification) {
 			if(loops>dones){
 				document.getElementById('dones').className = 'hint';
 				playAudio();
+				new Notification("Time is Up", {
+					body: 'Time Remaining: 0s / '+interTime+'s',
+					icon: 'time.jpg'
+				});
 			}
 		}
 		//VERSION 2.0 Add Chart.js, audio prompt
