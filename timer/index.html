@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Time-Lapse Photography Timer</title>
+	<title>Marshall's Timer</title>
 	<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
 	<style>
 		.contain{text-align:center;margin-top:5%;width:80%;background:#fff;border-radius:5px;box-shadow: 2px 3px 20px 0px black;padding:20px;}
@@ -145,10 +145,14 @@ if (window.Notification) {
 					time += 1;
 		//Add Chrome Notification when time goes half	
 					if(time == ((interTime/2)+1).toFixed()){
-						new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
+						var noti = new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
 							body: 'Time Remaining: '+((interTime+1)-time)+'s',
 							icon: 'time.jpg'
 						});
+						noti.onclick = function(){
+							doneshots()
+						}
+						noto.close();
 
 					}
 				}else{
