@@ -52,7 +52,7 @@
 		<!-- <source src='../src/down_cut.mp3' type="audio/mp3"></source> .mp3: Chrome,IE9,Safari-->
 	</audio>
 	<div class="contain contain-sm">
-		<h1 class='mainTitle'>Time-Lapse Photography Timer</h1>
+		<h1 class='mainTitle'>Marshall's Timer</h1>
 		<div class='form-group'>
 			<label for='interTime'>Interval Seconds</label>
 			<input type="number" id='interTime' placeholder=">= 2" class='timeinput' min=2/>
@@ -145,15 +145,10 @@ if (window.Notification) {
 					time += 1;
 		//Add Chrome Notification when time goes half	
 					if(time == ((interTime/2)+1).toFixed()){
-						var noti = new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
+						new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
 							body: 'Time Remaining: '+((interTime+1)-time)+'s',
 							icon: 'time.jpg'
 						});
-						noti.onclick = function(){
-							doneshots()
-						}
-						noto.close();
-
 					}
 				}else{
 					document.getElementById('shows').innerHTML = '<span class="hint">'+interTime+' s</span>';
@@ -200,10 +195,14 @@ if (window.Notification) {
 			if(loops>dones){
 				document.getElementById('dones').className = 'hint';
 				playAudio();
-				new Notification("Time is Up", {
+				var noti =  new Notification("Time is Up", {
 					body: 'Time Remaining: 0s / '+interTime+'s',
 					icon: 'time.jpg'
 				});
+				noti.onclick = function(){
+					document.getElementById('done').click()
+					noti.close();
+				}
 			}
 		}
 		//VERSION 2.0 Add Chart.js, audio prompt
