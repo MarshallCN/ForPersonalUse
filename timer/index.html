@@ -145,10 +145,13 @@ if (window.Notification) {
 					time += 1;
 		//Add Chrome Notification when time goes half	
 					if(time == ((interTime/2)+1).toFixed()){
-						new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
+						var noti1 = new Notification("Time Warning: "+((time-1)/interTime*100).toFixed(2) + '%', {
 							body: 'Time Remaining: '+((interTime+1)-time)+'s',
 							icon: 'time.jpg'
 						});
+						noti1.onclick = function(){
+							noti1.close()
+						}
 					}
 				}else{
 					document.getElementById('shows').innerHTML = '<span class="hint">'+interTime+' s</span>';
