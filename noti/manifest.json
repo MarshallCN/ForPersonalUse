@@ -1,0 +1,11 @@
+{
+  "name": "Hello World",
+  "short_name": "Short Name",
+  "icons": [{
+        "src": "EMCS/push-messaging-and-notifications/images/icon-192x192.png",
+        "sizes": "192x192"
+      }],
+  "start_url": "http://localhost/emcs",
+  "display": "standalone",
+  "gcm_sender_id": "547287430118"
+}
