@@ -2,7 +2,7 @@
   "name": "Hello World",
   "short_name": "Short Name",
   "icons": [{
-        "src": "test/noti/push-messaging-and-notifications/images/icon-192x192.png",
+        "src": "test/noti/images/icon-192x192.png",
         "sizes": "192x192"
       }],
   "start_url": "https://marshallcn.github.io",
