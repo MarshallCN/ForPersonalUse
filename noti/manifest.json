@@ -2,10 +2,10 @@
   "name": "Hello World",
   "short_name": "Short Name",
   "icons": [{
-        "src": "test/noti/images/icon-192x192.png",
+        "src": "https://marshallcn.github.io/test/noti/images/icon-192x192.png",
         "sizes": "192x192"
       }],
-  "start_url": "https://marshallcn.github.io",
+  "start_url": "http://cwms.pe.hu/EMCS/login.php",
   "display": "standalone",
   "gcm_sender_id": "547287430118"
 }
