@@ -38,9 +38,8 @@
 		/* Calculate Normalized Discounted Cumulative Gain */
 		NDCG = DCG==0 ? 0:DCG/IDCG
 		console.log("NDCG: "+NDCG);
-		showRes.innerHTML = "<h2>Precision@"+resLimit.toFixed(3)+": "+precisionAT+"</h2><h2>Average Precision: "
-		+precision.toFixed(3)+"</h2><h2>Reciprocal Rank: "+reciprocal.toFixed(3)+"<h2>Discounted Cumulative Gain: "
-		+DCG.toFixed(3)+"</h2><h2>IDCG: "+IDCG.toFixed(3)+"</h2><h2>NDCG: "+NDCG.toFixed(3)+"</h2>";
+		showRes.innerHTML = "<h2>Precision@"+resLimit.toFixed(3)+": "+precisionAT+"</h2><h2>Average Precision: "+precision.toFixed(3)+"</h2><h2>Reciprocal Rank: "
+		+reciprocal.toFixed(3)+"<h2>Discounted Cumulative Gain: "+DCG.toFixed(3)+"</h2><h2>IDCG: "+IDCG.toFixed(3)+"</h2><h2>NDCG: "+NDCG.toFixed(3)+"</h2>";
 	}
 //Results display 
 	function createResDis(){
@@ -50,19 +49,16 @@
 		showRes.style.position = 'fixed';
 		showRes.style.background = "rgba(216,170,170,0.5)";
 		showRes.style.zIndex = 9999
-		showRes.style.margin = '-220px 0 0 66%';
+		showRes.style.margin = '-220px 0 0 1000px';
 		showRes.style.color = 'blue';
 		showRes.style.cursor = 'pointer';
 		showRes.title = 'Click to Refresh';
-		// When user click the results display, clear all the created buttons and range bar, click again to rebuild new test
-		showRes.onclick = function(){ 
+		showRes.onclick = function(){ // When user click the results display, clear all the created buttons and range bar, click again to rebuild new test
 			var elen = document.getElementsByClassName('mybtnrel').length
 			for(var index=0;index<elen;e++){ 
 				var e = document.getElementsByClassName('mybtnrel')
 				var e1 = document.getElementsByClassName('myrate')
-					if(e[index]!=undefined&&e[index].parentElement!=undefined){
-						e[index].parentNode.style.background='#fff';e[index].parentElement.removeChild(e[index])
-					}
+					if(e[index]!=undefined&&e[index].parentElement!=undefined)e[index].parentNode.style.background='#fff';e[index].parentElement.removeChild(e[index])
 					if(e1[index]!=undefined&&e1[index].parentElement!=undefined)e1[index].parentElement.removeChild(e1[index])
 			}
 			this.parentElement.removeChild(this)
@@ -132,8 +128,7 @@
 		list = document.getElementsByTagName("ytd-video-renderer") //YouTube video result tag name
 		list[0].appendChild(createResDis()) //Create a div to show results
 		res = []; // Use to store relevant result
-		//By default analyze all results in current page unless user set a limit value
-		resLimit = resLimit != undefined ? resLimit > list.length ? list.length : resLimit : list.length 
+		resLimit = resLimit != undefined ? resLimit > list.length ? list.length : resLimit : list.length //By default analyze all results in current page unless user set a limit value
 		for(var i=0;i<resLimit;i++){ //for each results
 			list[i].appendChild(createRelBtn(i)); // create a relevant-decision button
 			list[i].appendChild(createRateRange(i)); //create a relevance score range input
