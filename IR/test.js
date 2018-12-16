@@ -135,7 +135,7 @@
 		}
 	}
 (function(){
-	resLimit = 10 //gather 20 documents
+	resLimit = 10 //gather 10 documents
 	analyseRes()
 })();
 function testlist(){
