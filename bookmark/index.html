@@ -1,0 +1,90 @@
+<html style="font-family:Arial,sans-serif;">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bookmark Tools</title>
+	<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+	<style>
+		.contain{text-align:center;margin-top:5%;width:70%;background:#fff;border-radius:5px;box-shadow: 2px 3px 20px 0px black;padding:20px;}
+		.timeinput{padding:8px 10px 8px 10px;width:30%;border-radius:5px;box-shadow:0px;}
+		.form-group{width:100%;padding:1%;}
+		.btn_MARSHALL{
+			display: inline-block;
+			padding: 6px 12px;
+			margin-bottom: 0;
+			font-size: 15px;
+			font-weight: 400;
+			line-height: 1.4;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			background-image: none;
+			touch-action: manipulation;
+			-ms-touch-action: manipulation;
+			border: 1px solid transparent;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			border-radius: 4px;
+			user-select: none;
+			cursor: pointer;
+			cursor: grabbing;
+			color:white;
+			text-decoration:none;
+			width: 40%;
+		}
+		.btn_warn{background: #FF6384;}
+		.btn_primary{background: #36A2EB;}
+		.btn_done{background: #4BC0C0;}
+		.btn_done:hover{background: #84eaea;color:black;}
+		.btn_warn:hover{background: #fd8fa6;color:black;}
+		.btn_primary:hover{background: #82c3ef;color:black;}
+		.btn_done:disabled{background: #add6d6;color:grey;cursor:not-allowed;}
+		@media (min-width:590px){.btn_block{padding: 12px 40px 12px 40px;}}
+		@media (max-width:590px){.contain{margin-bottom:300px;}.mainTitle{font-size:1.2em}}
+	</style>
+</head>
+<body style="background:#1E3E57">
+<center>
+	<div class="contain contain-sm">
+		<h1 class='mainTitle'>Bookmark Tools</h1>
+		<p><i><b>Drag</b> following buttons to your bookmark tabs to make life easier</i></p>
+		<div class='form-group'>
+			<a title='Drag to bookmark tab' onmouseover='changeLabel(this,"Translate")' href="javascript:var s=document.createElement('script');s.src='https://caiyunapp.com/dest/trs.js';document.body.appendChild(s);void(0);" alt='23' class='btn_MARSHALL btn_block btn_warn'>
+			Translate Website (Chinese-English)</a>
+			<div><i style='color:#999'>(using JS from caiyunapp.com)</i></div>
+		</div>
+		<div class='form-group'>
+			<a title='Drag to bookmark tab' onmouseover='changeLabel(this,"Stay")' href="javascript:if(confirm('You will keep staying in the current page')){window.onbeforeunload=function(){return 'Do you want to leave or refresh current page?';}}else{window.onbeforeunload=function(){void(0);}}" class='btn_MARSHALL btn_block btn_primary'>
+			Avoid Closing or Refresh Current Page</a>
+			<div><i style='color:#999'>(alert while leaving current webpage)</i></div>
+		</div>
+		<div class='form-group'>
+			<a title='Drag to bookmark tab' onmouseover='changeLabel(this,"Remind")' href="javascript:if(ques=prompt('Please type your reminder message below','Hello!')){if(time=prompt('You will be alerted in ____ minutes (>= 1)', 5)){time = parseInt(time)>=1 ? parseInt(time)*60*1000:10000;tit=parseInt(time)/1000;origtit=document.title;titShow=setInterval(function(){tit-=1;document.title=tit+'s Remaining'},1000);reminder = setTimeout(function(){alert(ques);clearInterval(titShow);document.title=origtit},time)}};void(0);" class='btn_MARSHALL btn_block btn_done'>
+			Remind me ___ in __ mins later</a>
+			<div><i style='color:#999'>(potable reminder that can customize alert message and time)</i></div>
+		</div>
+	</div>
+</center>
+</body>
+</html>
+<script>
+function changeLabel(e,t){
+	text = e.innerHTML
+	e.innerHTML = t
+	e.onmouseout = function(){
+		this.innerHTML = text
+	}
+}
+//Chrome Notification
+/*if (window.Notification) {
+    if (Notification.permission != "granted") {
+            Notification.requestPermission(function (permission) {
+              console.log("Chrome Notification setting is "+permission);
+            });
+    }
+} else {
+    console.log('Browser cannot support Notification');    
+}*/
+</script>
