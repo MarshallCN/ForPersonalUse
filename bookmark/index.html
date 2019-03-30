@@ -63,7 +63,7 @@
 		<div class='form-group'>
 			<a title='Drag to bookmark tab' onmouseover='changeLabel(this,"Remind")' href="javascript:if(ques=prompt('Please type your reminder message below','Hello!')){if(time=prompt('You will be alerted in ____ minutes (>= 1)', 5)){time = parseInt(time)>=1 ? parseInt(time)*60*1000:10000;tit=parseInt(time)/1000;origtit=document.title;titShow=setInterval(function(){tit-=1;document.title=tit+'s Remaining'},1000);reminder = setTimeout(function(){alert(ques);clearInterval(titShow);document.title=origtit},time)}};void(0);" class='btn_MARSHALL btn_block btn_done'>
 			Remind me ___ in __ mins later</a>
-			<div><i style='color:#999'>(potable <a style='color:#999' href='https://marshallcn.github.io/test/timer/'>timer</a> that can customize alert message)</i></div>
+			<div><i style='color:#999'>(portable <a style='color:#999' href='https://marshallcn.github.io/test/timer/'>timer</a> that can customize alert message)</i></div>
 		</div>
 	</div>
 </center>
