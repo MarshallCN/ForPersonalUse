@@ -5,7 +5,7 @@
         "src": "https://marshallcn.github.io/test/noti/images/icon-192x192.png",
         "sizes": "192x192"
       }],
-  "start_url": "http://cwms.pe.hu/EMCS/login.php",
+  "start_url": "https://marshallcn.github.io/test/noti/index.html",
   "display": "standalone",
   "gcm_sender_id": "547287430118"
 }
